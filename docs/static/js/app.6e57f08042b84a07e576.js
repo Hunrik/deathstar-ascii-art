@@ -83,11 +83,12 @@ class Main extends __WEBPACK_IMPORTED_MODULE_5_views_AbstractApplication__["a" /
 // const cubeMaterial = new THREE.MeshBasicMaterial({color: 0xFF0000})
 // const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
 // this._scene.add(cube)
-_this.effect=new __WEBPACK_IMPORTED_MODULE_0_three__["AsciiEffect"](_this._renderer,undefined,{resolution:0.150,invert:true});_this.effect.setSize(window.innerWidth,window.innerHeight);document.body.appendChild(_this.effect.domElement);_this._controls=new __WEBPACK_IMPORTED_MODULE_0_three__["OrbitControls"](_this._camera,_this.effect.domElement);_this._controls.enableZoom=false;const ambientLight=new __WEBPACK_IMPORTED_MODULE_0_three__["AmbientLight"](0xF4F4F4);_this._scene.add(ambientLight);// this.init2()
-_this.animate();})();}animate(){requestAnimationFrame(this.animate.bind(this));// console.log(this.effect)
-this._controls.update();// this._renderer.render(this._scene, this._camera)
-this.effect.render(this._scene,this._camera);// this.camera2.position.copy(this._camera.position)
-// this.camera2.position.sub(this._controls.target) // added by @libe
+const effect=new __WEBPACK_IMPORTED_MODULE_0_three__["AsciiEffect"](_this._renderer,undefined,{resolution:0.150,invert:true});effect.setSize(window.innerWidth,window.innerHeight);document.body.appendChild(effect.domElement);const controls=new __WEBPACK_IMPORTED_MODULE_0_three__["OrbitControls"](_this._camera,effect.domElement);const render=function(){effect.render(_this._scene,_this._camera);};controls.addEventListener('change',render);controls.enableZoom=false;const ambientLight=new __WEBPACK_IMPORTED_MODULE_0_three__["AmbientLight"](0xF4F4F4);_this._scene.add(ambientLight);// this.init2()
+render();})();}animate(){// requestAnimationFrame(this.animate.bind(this))
+// console.log(effect)
+// this._renderer.render(this._scene, this._camera)
+// this.camera2.position.copy(this._camera.position)
+// thhis._controls.target) // added by @libe
 // this.camera2.position.setLength(200)
 // this.camera2.lookAt(this.scene2.position)
 // this.renderer2.render(this.scene2, this.camera2)
@@ -350,4 +351,4 @@ window.addEventListener('resize',this.onWindowResize.bind(this),false);}get rend
 
 /***/ })
 ],[1]);
-//# sourceMappingURL=app.34c1ce5ab1e9fb41e0ec.js.map
+//# sourceMappingURL=app.6e57f08042b84a07e576.js.map
