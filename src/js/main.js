@@ -39,26 +39,29 @@ class Main extends AbstractApplication {
     // const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
     // this._scene.add(cube)
 
-    this.effect = new THREE.AsciiEffect(this._renderer, undefined, {resolution: 0.150, invert: true})
-    this.effect.setSize(window.innerWidth, window.innerHeight)
-    document.body.appendChild(this.effect.domElement)
+    const effect = new THREE.AsciiEffect(this._renderer, undefined, {resolution: 0.150, invert: true})
+    effect.setSize(window.innerWidth, window.innerHeight)
+    document.body.appendChild(effect.domElement)
 
-    this._controls = new THREE.OrbitControls(this._camera, this.effect.domElement)
-    this._controls.enableZoom = false
+    const controls = new THREE.OrbitControls(this._camera, effect.domElement)
+    const render = () => {
+      effect.render(this._scene, this._camera)
+    }
+    controls.addEventListener('change', render)
+    controls.enableZoom = false
     const ambientLight = new THREE.AmbientLight(0xF4F4F4)
     this._scene.add(ambientLight)
     // this.init2()
-    this.animate()
+    render()
   }
   animate () {
-    requestAnimationFrame(this.animate.bind(this))
-    // console.log(this.effect)
-    this._controls.update()
+    // requestAnimationFrame(this.animate.bind(this))
+    // console.log(effect)
+
     // this._renderer.render(this._scene, this._camera)
-    this.effect.render(this._scene, this._camera)
 
     // this.camera2.position.copy(this._camera.position)
-    // this.camera2.position.sub(this._controls.target) // added by @libe
+    // thhis._controls.target) // added by @libe
     // this.camera2.position.setLength(200)
     // this.camera2.lookAt(this.scene2.position)
     // this.renderer2.render(this.scene2, this.camera2)
