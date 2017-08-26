@@ -7,8 +7,6 @@ import './OBJMTLLoader'
 import './AsciiEffect'
 // import './ColladaLoader'
 import AbstractApplication from 'views/AbstractApplication'
-import shaderVert from 'shaders/custom.vert'
-import shaderFrag from 'shaders/custom.frag'
 
 class Main extends AbstractApplication {
   constructor () {
@@ -16,25 +14,8 @@ class Main extends AbstractApplication {
     this.init()
   }
   async init () {
-    // const deathstar = await this.STLLoader('assets/models/deathstar.stl')
-    // const deathstar = await this.STLLoader('assets/models/ds.stl')
-    // const deathstar = await this.loadObj('assets/models/Death_Star.obj')
-    // const deathstar = await this.mtlLoader('assets/models/Death_Star.mtl')
     const deathstar = await this.OBJMTLLoader('assets/models/Death_Star.obj', 'assets/models/Death_Star.mtl')
     const texture = await this.loadTexture('assets/textures/Death_Star_D.gif')
-    // const depth = await this.loadTexture('assets/textures/Death_Star_E.gif')
-    // const material = new THREE.MeshDepthMaterial({map: texture, alphaMap: depth})
-    // const collada = await this.colladaLoader('assets/models/Death_Star.dae')
-    // const { scene: deathstar } = collada
-    // console.log(collada)
-    // deathstar.traverse(function (child) {
-    //   if (child instanceof THREE.Mesh) {
-    //     // child.material.flatShading = true
-    //   }
-    // })
-    // deathstar.castShadow = deathstar.receiveShadow = false
-    // const mesh = new THREE.Mesh(deathstar, material)
-    // mesh.rotation.x = 90
     const mat1 = deathstar.children[0].children[0].material
     const mat2 = deathstar.children[0].children[1].material
     mat1.opacity = 0.1
@@ -53,10 +34,10 @@ class Main extends AbstractApplication {
     this.deathstar = deathstar
 
     // / Reference cube
-    const cubeGeometry = new THREE.CubeGeometry(4, 4, 4)
-    const cubeMaterial = new THREE.MeshBasicMaterial({color: 0xFF0000})
-    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-    this._scene.add(cube)
+    // const cubeGeometry = new THREE.CubeGeometry(4, 4, 4)
+    // const cubeMaterial = new THREE.MeshBasicMaterial({color: 0xFF0000})
+    // const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+    // this._scene.add(cube)
 
     this.effect = new THREE.AsciiEffect(this._renderer, undefined, {resolution: 0.150, invert: true})
     this.effect.setSize(window.innerWidth, window.innerHeight)
